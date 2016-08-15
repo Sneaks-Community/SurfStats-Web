@@ -1,4 +1,4 @@
-<?
+<?php
 if($secure==1){
 	
 $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
@@ -26,7 +26,7 @@ $result = $conn->query($sql);
 	</tr>
 </thead>
 <tbody>
-<?
+<?php
 
 if ($result->num_rows > 0) {
     // output data of each row
@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
 ?>
 </tbody>
 </table>
-<?
+<?php
 
 $conn->close();
 

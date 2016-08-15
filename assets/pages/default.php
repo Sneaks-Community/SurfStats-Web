@@ -1,4 +1,4 @@
-<?
+<?php
 if($secure==1){
 	
 $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
@@ -24,7 +24,7 @@ $result = $conn->query($sql);
 		</tr>
 	</thead>
 	<tbody>
-	<?
+	<?php
 		$file = fopen("servers.txt","r");
 		while(! feof($file))
 		{
@@ -51,7 +51,7 @@ $result = $conn->query($sql);
 		</tr>
 	</thead>
 	<tbody>
-	<?
+	<?php
 	if ($result->num_rows > 0) {
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
@@ -63,7 +63,7 @@ $result = $conn->query($sql);
 	?>
 	</tbody>
 </table>
-<?
+<?php
 
 $database_call = $db_prefix."latestrecords";
 
@@ -84,7 +84,7 @@ $result = $conn->query($sql);
 		</tr>
 	</thead>
 	<tbody>
-	<?
+	<?php
 
 	if ($result->num_rows > 0) {
 		// output data of each row
@@ -102,7 +102,7 @@ $result = $conn->query($sql);
 	?>
 	</tbody>
 </table>
-<?
+<?php
 $conn->close();
 }
 ?>

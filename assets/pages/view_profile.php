@@ -1,4 +1,4 @@
-<?
+<?php
 if($secure==1){
 	
 $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
@@ -23,14 +23,14 @@ if ($result->num_rows > 0) {
 		?>
 		<table class="table table-striped table-hover ">
 			<tbody>
-				<?
+				<?php
 					echo"<tr><td><b>Points</b> : ".$row[points]."</td><td><b>Country</b> : ".$row[country]."</tr>";
 					echo"<tr><td><b>Win Ratio</b> : ".$row[winratio]."</td><td><b>Points Ratio</b> : ".$row[pointsratio]."</tr>";
 					echo"<tr><td><b>Finished Maps</b> : ".$row[finishedmaps]."</td><td><b>Finished Maps Pro</b> : ".$row[finishedmapspro]."</tr>";
 				?>
 			</tbody>
 		</table>
-		<?
+		<?php
     }
 } 
 
@@ -51,7 +51,7 @@ $result = $conn->query($sql);
 		</tr>
 	</thead>
 	<tbody>
-		<?
+		<?php
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
@@ -61,4 +61,4 @@ $result = $conn->query($sql);
 		?>
 	</tbody>
 </table>
-<? $conn->close(); } ?>
+<?php $conn->close(); } ?>

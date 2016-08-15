@@ -1,8 +1,10 @@
-<? $secure = 1; include("config.php"); $page_topic = htmlspecialchars($_GET[view], ENT_QUOTES); ?>
-<?
+<?php $secure = 1; include("config.php"); $page_topic = htmlspecialchars($_GET[view], ENT_QUOTES); ?>
+<?php
 function processFloat($seconds) {
-	$t = round($seconds);
-	return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
+		$micro = sprintf("%06d",($seconds - floor($seconds)) * 1000000);
+		$d = new DateTime( date('Y-m-d H:i:s.'.$micro,$seconds) );
+
+		return $d->format("i:s.u");
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ function processFloat($seconds) {
 <body>
 <div class="container">
 
-<h1><? echo $stat_name; ?></h1>
+<h1><?php echo $stat_name; ?></h1>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -40,13 +42,13 @@ function processFloat($seconds) {
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<? echo $group_url; ?>"><? echo $group_name; ?></a></li>
+        <li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<?
+<?php
 
 switch($page_topic){
 	

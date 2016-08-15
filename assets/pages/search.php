@@ -1,4 +1,4 @@
-<?
+<?php
 if($secure==1){
 
 	if(!$_POST){ echo"<div class=\"alert alert-dismissible alert-warning\"><h4>Uh-Oh!</h4><p>You need to enter in a search term!</p></div>"; }else{
@@ -39,7 +39,7 @@ if($secure==1){
 			</tr>
 		</thead>
 		<tbody>
-			<?
+			<?php
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["country"]."</td><td>".$row["points"]."</td><td>".$row[finishedmaps]."<td>".$row[lastseen]."</td></tr>";
@@ -51,4 +51,4 @@ if($secure==1){
 		</tbody>
 	</table>
 
-<?	$conn->close();	} } }  ?>
+<?php	$conn->close();	} } }  ?>

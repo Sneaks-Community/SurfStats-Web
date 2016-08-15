@@ -1,4 +1,4 @@
-<?
+<?php
 if($secure==1){
 	
 $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
@@ -19,7 +19,7 @@ $result = $conn->query($sql);
 
 ?>
 
-<h2>Map stats : <? echo $mapname; ?></h2>
+<h2>Map stats : <?php echo $mapname; ?></h2>
 
 <table class="table table-striped table-hover ">
 	<thead>
@@ -30,7 +30,7 @@ $result = $conn->query($sql);
 		</tr>
 	</thead>
 	<tbody>
-		<?
+		<?php
 
 		if ($result->num_rows > 0) {
 			// output data of each row
@@ -48,4 +48,4 @@ $result = $conn->query($sql);
 		?>
 	</tbody>
 </table>
-<? $conn->close(); } ?>
+<?php $conn->close(); } ?>
