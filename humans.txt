@@ -1,0 +1,26 @@
+/* CREDITS */
+	Assembled by Rowedahelicon
+	Twitter: @rowedahelicon
+	Website: http://www.rowedahelicon.com
+	From: Connecticut, United States
+	Note: Please contact me if you have any questions / issues
+
+/* THANKS */
+
+	CkSurf
+	https://forums.alliedmods.net/showthread.php?t=264498
+	jonitaikaponi
+	
+	Valve
+	Valve Software
+	
+	Bootstrap
+	http://getbootstrap.com/
+	
+	Jquery
+	https://jquery.com/
+		
+
+/* SITE */
+	Doctype:HTML5
+	IDE: Notepad++
