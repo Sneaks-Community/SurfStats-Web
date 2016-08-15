@@ -25,10 +25,11 @@ $result = $conn->query($sql);
 	</thead>
 	<tbody>
 	<?
-		$file = fopen("assets/data/servers.txt","r");
+		$file = fopen("servers.txt","r");
 		while(! feof($file))
 		{
-			$pieces = explode("|", fgets($file));
+			$pieces = htmlspecialchars(fgets($file),ENT_QUOTES);
+			$pieces = explode("|", $pieces);
 			echo "<tr><td><a href='steam://connect/".$pieces[0]."'>".$pieces[0]."</a></td><td>".$pieces[1]."</td></tr>";
 		}
 
