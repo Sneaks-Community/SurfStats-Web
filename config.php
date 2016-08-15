@@ -18,15 +18,8 @@ $db_user = ''; # Database username
 $db_passwd = ''; # Database password
 $db_prefix = 'ck_'; # The prefix you chose for your CKSurf Install, default is ck_
 
-$page_topic = htmlspecialchars($_GET[view], ENT_QUOTES);
-
-}
-
-# DO NOT EDIT THIS, it's an important function!
-
-function processFloat($seconds) {
-  $t = round($seconds);
-  return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
+}else{
+	header("location:http://google.com");
 }
 
 ?>
