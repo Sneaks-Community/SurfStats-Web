@@ -37,7 +37,7 @@ if ($result_save->num_rows > 0) {
 $database_call = $db_prefix."playertimes";
 
 foreach ($map_array as $value){
-	$sql = "SELECT * FROM $database_call WHERE mapname = '$value' ORDER BY runtimepro DESC LIMIT 3";
+	$sql = "SELECT * FROM $database_call WHERE mapname = '$value' ORDER BY runtimepro ASC LIMIT 3";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$x = 1;
