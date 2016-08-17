@@ -1,4 +1,4 @@
-<?php $secure = 1; include("config.php"); $page_topic = htmlspecialchars($_GET[view], ENT_QUOTES); ?>
+<?php $secure = 1; include("config.php"); include("assets/lang/$conf_language.php"); $page_topic = htmlspecialchars($_GET[view], ENT_QUOTES); ?>
 <?php
 function processFloat($seconds) {
 		$micro = sprintf("%06d",($seconds - floor($seconds)) * 1000000);
@@ -59,7 +59,19 @@ switch($page_topic){
 		include("assets/pages/view_maps.php");
 	break;
 	case "profile":
-		include("assets/pages/view_profile.php");
+		switch($conf_record_stats){
+			case"0":
+				include("assets/pages/view_profile_0.php");
+			break;
+			case"1":
+				include("assets/pages/view_profile.php");
+			break;
+			case"2":
+				include("assets/pages/view_profile_2.php");
+			break;
+			default:
+				include("assets/pages/view_profile.php");
+		}
 	break;
 	case "recent":
 		include("assets/pages/view_recent.php");
@@ -75,7 +87,7 @@ switch($page_topic){
 ?>
 
 <footer>
-Assembled by <a href="http://rowedahelicon.com/">Rowedahelicon</a> , CS:GO CkSurf built by <a href="https://forums.alliedmods.net/showthread.php?t=264498">Jonitaikaponi</a> <a href="humans.txt"><img src="assets/images/humanstxt-transparent-color.png" alt="Humans.txt image" /></a>
+Assembled by <a href="http://rowedahelicon.com/">Rowedahelicon</a> , CS:GO CkSurf built by <a href="https://forums.alliedmods.net/showthread.php?t=264498">Jonitaikaponi</a> <span style="font-size:8pt;">(V.1.2.)</span> <a href="humans.txt"><img src="assets/images/humanstxt-transparent-color.png" alt="Humans.txt image" /></a>
 </footer>
 
 </div>

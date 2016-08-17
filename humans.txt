@@ -20,6 +20,8 @@
 	Jquery
 	https://jquery.com/
 		
+	[ZTS] Samatazz - For suggestions
+	blackhawk74 - For suggestions
 
 /* SITE */
 	Doctype:HTML5

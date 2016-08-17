@@ -21,14 +21,15 @@ $steam_profile = ($split[2] * 2) + 0x0110000100000000 + $split[1];
 $database_call = $db_prefix."playertimes";
 
 $sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
-$result_save = $conn->query($sql);
+$result = $conn->query($sql);
 $map_array = array();
 $recordStat = 0;
 
-if ($result_save->num_rows > 0) {
+if ($result->num_rows > 0) {
 	// output data of each row
-	while($row = $result_save->fetch_assoc()) {
+	while($row = $result->fetch_assoc()) {
 		array_push($map_array,$row["mapname"]);
+		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
 	}
 }
 
@@ -42,20 +43,11 @@ foreach ($map_array as $value){
 	if ($result->num_rows > 0) {
 		$x = 1;
 		while($row = $result->fetch_assoc()) {
-		if($row[steamid] == $steamid){ $recordStat++; $record_times[$row[mapname]] = "<span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span><ck-o\" aria-hidden=\"true\"></i>"; } $x++;
+		if($row[steamid] == $steamid){ $recordStat++; $record_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><span class='rank_$x'><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</span></td></tr>"; } $x++;
 		}
 	}
 }
 
-$sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
-$result_save = $conn->query($sql);
-
-while($row = $result_save->fetch_assoc()) {
-	$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$record_times[$row[mapname]]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
-}
-
-
-		
 $database_call = $db_prefix."playerrank";
 
 
@@ -84,13 +76,27 @@ if ($result->num_rows > 0) {
 
 ?>
 
-<h2>Map stats</h2>
+<h2>Record Stats</h2>
 
 <table class="table table-striped table-hover ">
 	<thead>
 		<tr>
 			<th>Map name</th>
 			<th>Rank</th>
+			<th>Best time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php echo $record_times; ?>
+	</tbody>
+</table>
+	
+<h2>Map stats</h2>
+
+<table class="table table-striped table-hover ">
+	<thead>
+		<tr>
+			<th>Map name</th>
 			<th>Best time</th>
 		</tr>
 	</thead>

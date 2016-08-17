@@ -4,13 +4,6 @@ body{
 	background-image:url("../images/ef7cb44d312df5038cba0f69a0901da427900645.jpg");
 		background-repeat: no-repeat;
 }
-
-.container{
-	width:800px;
-	background-color:#28313A;
-	border: 5px solid #3D4959;
-}
-
 thead{
 	background-color:#1B2128;
 	color:#BDC3C7;
@@ -18,10 +11,6 @@ thead{
 
 tr{
 	color:#BDC3C7;
-}
-
-.rank_great{
-	color:#FDFE4A;
 }
 
 footer{
@@ -32,3 +21,14 @@ footer img{
 	border:0px;
 	float:right;
 }
+
+.container{
+	width:800px;
+	background-color:#28313A;
+	border: 5px solid #3D4959;
+}
+
+.rank_great{color:#FDFE4A;}
+.rank_1{color:#FAE800;}
+.rank_2{color:#F1F1F1;}
+.rank_3{color:#CDA04D;}
