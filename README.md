@@ -8,8 +8,8 @@ It is a basic stats display web page where you can view the leaderboard of diffe
 
 You can see a working demo of this project here : http://www.rowedahelicon.com/workshop/stats/?view=home
 
-![Alt text](http://i.imgur.com/1MESc1E.png "Screenshot")
-
+![Main page](http://i.imgur.com/1MESc1E.png "Screenshot")
+![Profile page](http://i.imgur.com/4oBMmO5.png "Screenshot 2")
 
 # Features:
 You can look up players by name!
