@@ -89,7 +89,7 @@ $result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
-			$timestamp = strtotime($row[date]);
+			$timestamp = strtotime($row["date"]);
 			$dt = new DateTime("now", new DateTimeZone($local_timezone));
 			$dt->setTimestamp($timestamp);
 			$timestamp = $dt->format('M j, Y, g:i a T');
