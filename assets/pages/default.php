@@ -56,7 +56,7 @@ $result = $conn->query($sql);
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
 
-			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["country"]."</td><td>".$row["points"]."</td><td>".$row[finishedmaps]."<td>".$row[lastseen]."</td></tr>";
+			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["country"]."</td><td>".$row["points"]."</td><td>".$row["finishedmaps"]."<td>".$row["lastseen"]."</td></tr>";
 
 		}
 	} 
