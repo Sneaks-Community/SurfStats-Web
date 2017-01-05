@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 
 //First query is to get a list of maps this person has completed.
 
-$steamid = mysqli_real_escape_string($conn, htmlspecialchars($_GET[id], ENT_QUOTES));
+$steamid = mysqli_real_escape_string($conn, htmlspecialchars($_GET["id"], ENT_QUOTES));
 
 //Grab STEAM Profile ID
 
@@ -42,7 +42,7 @@ foreach ($map_array as $value){
 	if ($result->num_rows > 0) {
 		$x = 1;
 		while($row = $result->fetch_assoc()) {
-		if($row[steamid] == $steamid){ $recordStat++; $record_times[$row[mapname]] = "<span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span><ck-o\" aria-hidden=\"true\"></i>"; } $x++;
+		if($row["steamid"] == $steamid){ $recordStat++; $record_times[$row["mapname"]] = "<span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span><ck-o\" aria-hidden=\"true\"></i>"; } $x++;
 		}
 	}
 }
