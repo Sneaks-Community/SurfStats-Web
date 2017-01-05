@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 
 $database_call = $db_prefix."playerrank";
 
-$mapname = mysqli_real_escape_string($conn, htmlspecialchars($_GET[name], ENT_QUOTES));
+$mapname = mysqli_real_escape_string($conn, htmlspecialchars($_GET["name"], ENT_QUOTES));
 
 
 $database_call = $db_prefix."playertimes";
