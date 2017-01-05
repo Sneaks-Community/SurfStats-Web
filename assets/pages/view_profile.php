@@ -44,6 +44,7 @@ foreach ($map_array as $value){
 	if ($result->num_rows > 0) {
 		$x = 1;
 		while($row = $result->fetch_assoc()) {
+		    $record_times[$row["mapname"]] = "";
 		if($row["steamid"] == $steamid){ $recordStat++; $record_times[$row["mapname"]] = "<span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span><ck-o\" aria-hidden=\"true\"></i>"; } $x++;
 		}
 	}
