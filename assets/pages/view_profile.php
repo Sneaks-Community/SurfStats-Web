@@ -51,7 +51,7 @@ $sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
 $result_save = $conn->query($sql);
 
 while($row = $result_save->fetch_assoc()) {
-	$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$record_times[$row[mapname]]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
+	$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$record_times[$row["mapname"]]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
 }
 
 
@@ -66,15 +66,15 @@ if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         
-		echo "<h2><a href='http://steamcommunity.com/profiles/".$steam_profile."'>".$row[name]."</a></h2>Last seen on ". $row[lastseen]."<br/><br/>";
+		echo "<h2><a href='http://steamcommunity.com/profiles/".$steam_profile."'>".$row["name"]."</a></h2>Last seen on ". $row["lastseen"]."<br/><br/>";
 		
 		?>
 		<table class="table table-striped table-hover ">
 			<tbody>
 				<?php
-					echo"<tr><td><b>Points</b> : ".$row[points]."</td><td><b>Country</b> : ".$row[country]."</tr>";
-					echo"<tr><td><b>Win Ratio</b> : ".$row[winratio]."</td><td><b>Points Ratio</b> : ".$row[pointsratio]."</tr>";
-					echo"<tr><td><b>Finished Maps</b> : ".$row[finishedmaps]."</td><td><b>Records</b> : ".$recordStat."</tr>";
+					echo"<tr><td><b>Points</b> : ".$row["points"]."</td><td><b>Country</b> : ".$row["country"]."</tr>";
+					echo"<tr><td><b>Win Ratio</b> : ".$row["winratio"]."</td><td><b>Points Ratio</b> : ".$row["pointsratio"]."</tr>";
+					echo"<tr><td><b>Finished Maps</b> : ".$row["finishedmaps"]."</td><td><b>Records</b> : ".$recordStat."</tr>";
 				?>
 			</tbody>
 		</table>
