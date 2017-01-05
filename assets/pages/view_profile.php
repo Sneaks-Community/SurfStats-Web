@@ -24,8 +24,8 @@ $sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
 $result_save = $conn->query($sql);
 $map_array = array();
 $recordStat = 0;
-$record_times = array();
-$map_times = array();
+$record_times = "";
+$map_times = "";
 
 if ($result_save->num_rows > 0) {
 	// output data of each row
