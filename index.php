@@ -1,4 +1,4 @@
-<?php $secure = 1; include("config.php"); include("assets/lang/$conf_language.php"); $page_topic = htmlspecialchars($_GET[view], ENT_QUOTES); ?>
+<?php $secure = 1; include("config.php"); include("assets/lang/$conf_language.php"); $page_topic = htmlspecialchars($_GET['view'], ENT_QUOTES); ?>
 <?php
 function processFloat($seconds) {
 		$micro = sprintf("%06d",($seconds - floor($seconds)) * 1000000);
