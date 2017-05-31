@@ -1,13 +1,14 @@
 <?php
 if($secure==1){
 	
-$conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
+$conn = @new mysqli($db_server, $db_user, $db_passwd, $db_name);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $database_call = $db_prefix."playerrank";
+$database_call_2 = $db_prefix."maptier";
 
 $sql = "SELECT * FROM $database_call ORDER BY points DESC LIMIT 10";
 $result = $conn->query($sql);
@@ -80,7 +81,8 @@ $result = $conn->query($sql);
 			<th>Player name</th>
 			<th>Runtime</th>
 			<th>Map</th>
-			<th>Date</tH>
+			<th>Date</th>
+			<th>Map Tier</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -93,8 +95,11 @@ $result = $conn->query($sql);
 			$dt = new DateTime("now", new DateTimeZone($local_timezone));
 			$dt->setTimestamp($timestamp);
 			$timestamp = $dt->format('M j, Y, g:i a T');
-			
-			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td><a href='?view=map&name=".$row["map"]."'>".$row["map"]."</a></td><td>".$timestamp."</td></tr>";
+			$current_map = $row["map"];
+			$result_tier = $conn->query("SELECT tier FROM $database_call_2 WHERE mapname='$current_map' limit 1");
+			$value = mysqli_fetch_object($result_tier);
+			$this_map_tier = $value->tier;
+			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td><a href='?view=map&name=".$row["map"]."'>".$row["map"]."</a></td><td>".$timestamp."</td><td>".$this_map_tier."</td></tr>";
 
 		}
 	} 

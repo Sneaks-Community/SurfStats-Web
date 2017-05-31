@@ -4,6 +4,8 @@
 	Website: http://www.rowedahelicon.com
 	From: Connecticut, United States
 	Note: Please contact me if you have any questions / issues
+	
+	Normalize.css -- github.com/necolas/normalize.css
 
 /* THANKS */
 
@@ -22,6 +24,7 @@
 		
 	[ZTS] Samatazz - For suggestions
 	blackhawk74 - For suggestions
+	Kryptanyte - For suggestions
 
 /* SITE */
 	Doctype:HTML5

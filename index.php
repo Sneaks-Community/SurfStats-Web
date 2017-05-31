@@ -24,71 +24,77 @@ function processFloat($seconds) {
 <body>
 <div class="container">
 
-<h1><?php echo $stat_name; ?></h1>
+	<h1><?php echo $stat_name; ?></h1>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
 
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-		<li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-        <li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" action="?view=search" method="post">
-        <div class="form-group">
-			<input name="search" class="form-control" placeholder="Search Players" type="text">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+			<li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
+		  </ul>
+		  <form class="navbar-form navbar-left" action="?view=search" method="post">
+			<div class="form-group">
+				<input name="search" class="form-control" placeholder="Search Players" type="text">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		  </form>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
 
-<?php
+	<?php
 
-switch($page_topic){
-	
-	case "map":
-		include("assets/pages/view_map.php");
-	break;
-	case "maps":
-		include("assets/pages/view_maps.php");
-	break;
-	case "profile":
-		switch($conf_record_stats){
-			case"0":
-				include("assets/pages/view_profile_0.php");
-			break;
-			case"1":
-				include("assets/pages/view_profile.php");
-			break;
-			case"2":
-				include("assets/pages/view_profile_2.php");
-			break;
-			default:
-				include("assets/pages/view_profile.php");
-		}
-	break;
-	case "recent":
-		include("assets/pages/view_recent.php");
-	break;
-	case "search":
-		include("assets/pages/search.php");
-	break;
-	default:
-	
-	include("assets/pages/default.php");
-}
+	switch($page_topic){
+		
+		case "map":
+			include("assets/pages/view_map.php");
+		break;
+		case "maps":
+			include("assets/pages/view_maps.php");
+		break;
+		case "records": //--coming soon!
+			include("assets/pages/view_records.php");
+		break;
+		case "profile":
+			switch($conf_record_stats){
+				case"0":
+					include("assets/pages/view_profile_0.php");
+				break;
+				case"1":
+					include("assets/pages/view_profile.php");
+				break;
+				case"2":
+					include("assets/pages/view_profile_2.php");
+				break;
+				default:
+					include("assets/pages/view_profile.php");
+			}
+		break;
+		case "recent":
+			include("assets/pages/view_recent.php");
+		break;
+		case "search":
+			include("assets/pages/search.php");
+		break;
+		/*case "tiers":
+			include("assets/pages/view_tiers.php");
+		break;*/ //Coming soon
+		default:
+		
+		include("assets/pages/default.php");
+	}
 
-?>
+	?>
 
-<footer>
-Assembled by <a href="http://rowedahelicon.com/">Rowedahelicon</a> , CS:GO CkSurf built by <a href="https://forums.alliedmods.net/showthread.php?t=264498">Jonitaikaponi</a> <span style="font-size:8pt;">(V.1.2.)</span> <a href="humans.txt"><img src="assets/images/humanstxt-transparent-color.png" alt="Humans.txt image" /></a>
-</footer>
+	<footer>
+	Assembled by <a href="https://gitlab.com/Rowedahelicon/CkSurfStatsPage">Rowedahelicon</a> <span style="font-size:8pt;">(V.1.3.)</span>, CS:GO CkSurf built by <a href="https://forums.alliedmods.net/showthread.php?t=264498">Jonitaikaponi</a><?php if($use_marco_cksurf == '1'){ echo" & <a href='https://github.com/marcowmadeira/ckSurf'>Marcowmadeira</a>"; } ?> <a href="humans.txt"><img src="assets/images/humanstxt-transparent-color.png" alt="Humans.txt image" /></a>
+	</footer>
 
 </div>
 </body>

@@ -50,17 +50,26 @@ foreach ($map_array as $value){
 	}
 }
 
-$sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
+//Pagination
+
+$database_call = $db_prefix."playertimes";
+$result = $conn->query("SELECT * FROM $database_call WHERE steamid = '$steamid'");
+$row_cnt = ceil($result->num_rows / 30);
+
+$page_start = ($_GET["p"] ? mysqli_real_escape_string($conn, htmlspecialchars($_GET["p"], ENT_QUOTES)) : '0');
+
+if($page_start >=1){ $page_start = $page_start - 1; }
+if($page_start <0){ $page_start = 0; }
+$page_start = $page_start * 30;
+
+$sql = "SELECT * FROM $database_call WHERE steamid = '$steamid' LIMIT $page_start,30";
 $result_save = $conn->query($sql);
 
 while($row = $result_save->fetch_assoc()) {
 	$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$record_times[$row["mapname"]]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
 }
 
-
-		
 $database_call = $db_prefix."playerrank";
-
 
 $sql = "SELECT * FROM $database_call WHERE steamid = '$steamid'";
 $result = $conn->query($sql);
@@ -89,6 +98,28 @@ if ($result->num_rows > 0) {
 
 <h2>Map stats</h2>
 
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="<?php echo "?view=profile&id=$steamid&p=1"; ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+	<?php
+	$x = 1;
+	while($x<=$row_cnt){
+		echo "<li><a href=\"?view=profile&id=$steamid&p=$x\">$x</a></li>";
+		$x++;
+	}
+	?>
+    <li>
+      <a href="<?php echo "?view=profile&id=$steamid&p=$row_cnt"; ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
 <table class="table table-striped table-hover ">
 	<thead>
 		<tr>
@@ -101,4 +132,26 @@ if ($result->num_rows > 0) {
 		<?php echo $map_times; ?>
 	</tbody>
 </table>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="<?php echo "?view=profile&id=$steamid&p=1"; ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+	<?php
+	$x = 1;
+	while($x<=$row_cnt){
+		echo "<li><a href=\"?view=profile&id=$steamid&p=$x\">$x</a></li>";
+		$x++;
+	}
+	?>
+    <li>
+      <a href="<?php echo "?view=profile&id=$steamid&p=$row_cnt"; ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 <?php $conn->close(); } ?>
