@@ -13,37 +13,58 @@ $database_call = $db_prefix."playertimes";
 if ($result = $conn->query("SELECT * FROM $database_call WHERE mapname='$mapname'")) { $run_cnt = $result->num_rows; $result->close(); }
 
 $database_call = $db_prefix."maptier";
-if ($result = $conn->query("SELECT * FROM $database_call WHERE mapname='$mapname' LIMIT 1")) { $row = $result->fetch_object(); $map_tier = $row->tier;  $result->close(); }
+if ($result = $conn->query("SELECT * FROM $database_call WHERE mapname='$mapname' LIMIT 1")) { $row = $result->fetch_object(); $map_tier = $row->tier; $map_author = $row->mapper; $result->close(); }
+
+$database_call = $db_prefix."zones";
+if ($result = $conn->query("SELECT MAX(zonegroup) AS bonuses FROM $database_call where mapname = '$mapname'")) { $row = $result->fetch_object(); $bonus_num = $row->bonuses;  $result->close(); }
+
+$database_call = $db_prefix."bonus";
+if ($result = $conn->query("SELECT COUNT(*) AS bonuses FROM $database_call WHERE mapname = '$mapname'")) { $row = $result->fetch_object(); $bonus_comp = $row->bonuses;  $result->close(); }
+
+$database_call = $db_prefix."playertimes";
+if ($result = $conn->query("SELECT AVG(runtimepro) AS average FROM $database_call WHERE mapname='$mapname'")) { $row = $result->fetch_object(); $avg_times = $row->average;  $result->close(); }
 
 $database_call = $db_prefix."playertimes";
 $result = $conn->query("SELECT * FROM $database_call WHERE mapname = '$mapname'");
-$row_cnt = ceil($result->num_rows / 30);
+$row_cnt = ceil($result->num_rows / 50);
 
 $page_start = ($_GET["p"] ? mysqli_real_escape_string($conn, htmlspecialchars($_GET["p"], ENT_QUOTES)) : '0');
 
 if($page_start >=1){ $page_start = $page_start - 1; }
 if($page_start <0){ $page_start = 0; }
-$page_start = $page_start * 30;
+$page_start = $page_start * 50;
 
-$sql = "SELECT * FROM $database_call WHERE mapname = '$mapname' ORDER BY runtimepro ASC LIMIT $page_start,30";
+$sql = "SELECT * FROM $database_call WHERE mapname = '$mapname' ORDER BY runtimepro ASC LIMIT $page_start,50";
 $result = $conn->query($sql);
 
 ?>
 
-<h2><?php echo $mapname; ?></h2>
-<b>Number of completed runs: <?php echo $run_cnt; ?></b><br/>
-<b>Map tier: <?php echo $map_tier; ?></b>
+<style>
+	.subheader img {
+		float: right;
+		border-radius: 10px;
+	}
+	
+	.subheader a:link {
+		color: lightgrey;
+	}
+	
+	.subheader a:visited {
+		color: lightgrey;
+	}
+</style>
 
-<h2>Record times</h2>
+<div class="subheader">
+	<img src="<?php echo "../bans/images/maps/$mapname.jpg"; ?>">
+	<h2><?php echo $mapname; ?> <a href="<?php echo "https://fastdl.snksrv.com/maps/$mapname.bsp.bz2"; ?>"<i class='fa fa-download' aria-hidden='true'></i></a></h2>
+	<h5>Map Author: <?php echo $map_author; ?></h5>
+	<b>Completions: <?php echo $run_cnt; ?></b><br/>
+	<b>Average Time: <?php echo "".processFloat($avg_times).""; ?></b><br/>
+	<b>Map Tier: <?php echo $map_tier; ?></b><br/>
+	<b>Bonuses: <?php echo $bonus_num; ?> (<?php echo $bonus_comp; ?> Completions)</b>
+</div>
 
-<?php
-if($use_marco_cksurf == '1'){
-	echo"<div class=\"btn-group\" role=\"group\" aria-label=\"...\">
-		<button type=\"button\" class=\"btn btn-primary\">Records</button>
-		<a class=\"btn btn-default\" href=\"?view=records&name=$mapname&p=1\">Stage Records</a>
-	</div>";
-}
-?>
+<h2>Record Times</h2>
 
 <nav aria-label="Page navigation">
   <ul class="pagination">
@@ -70,9 +91,10 @@ if($use_marco_cksurf == '1'){
 <table class="table table-striped table-hover ">
 	<thead>
 		<tr>
-			<th>Player name</th>
+			<th>Player</th>
 			<th></th>
-			<th>Best time</th>
+			<th>Best Time</th>
+			<th>Date</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -83,9 +105,9 @@ if($use_marco_cksurf == '1'){
 			$x=1;
 			while($row = $result->fetch_assoc()) {
 				if($x<=3) {
-					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
+					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td></tr>";
 				}else{
-					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
+					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td></tr>";
 				}
 			$x++;
 			}
@@ -94,27 +116,5 @@ if($use_marco_cksurf == '1'){
 		?>
 	</tbody>
 </table>
-
-<nav aria-label="Page navigation">
-  <ul class="pagination">
-    <li>
-      <a href="<?php echo "?view=map&name=$mapname&p=1"; ?>" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-	<?php
-	$x = 1;
-	while($x<=$row_cnt){
-		echo "<li><a href=\"?view=map&name=$mapname&p=$x\">$x</a></li>";
-		$x++;
-	}
-	?>
-    <li>
-      <a href="<?php echo "?view=map&name=$mapname&p=$row_cnt"; ?>" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
 
 <?php $conn->close(); } ?>

@@ -14,13 +14,13 @@ $sql = "SELECT tbl.* FROM $database_call tbl INNER JOIN( SELECT mapname,MIN(runt
 $result = $conn->query($sql);
 
 ?>
-<table class="table table-striped table-hover ">
+<table class="table table-striped table-hover sortable">
 <thead>
 	<tr>
-		<th>Map name</th>
-		<th>Map tier</th>
-		<th>Best time</th>
-		<th>Best time player</th>
+		<th>Map Name</th>
+		<th>Map Tier</th>
+		<th>WR Time</th>
+		<th>WR Holder</th>
 	</tr>
 </thead>
 <tbody>
