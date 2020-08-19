@@ -6,31 +6,6 @@ $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-/*
-//Player Count
-$database_call = $db_prefix."playerrank";
-if ($result = $conn->query("SELECT COUNT(*) as players FROM $database_call")) { $row = $result->fetch_object(); $players = $row->players;  $result->close(); }
-
-//Map Completions
-$database_call = $db_prefix."playertimes";
-if ($result = $conn->query("SELECT COUNT(*) as maptimes FROM $database_call")) { $row = $result->fetch_object(); $maptimes = $row->maptimes;  $result->close(); }
-
-//Map Completions
-$database_call = $db_prefix."bonus";
-if ($result = $conn->query("SELECT COUNT(*) as bonustimes FROM $database_call")) { $row = $result->fetch_object(); $bonustimes = $row->bonustimes;  $result->close(); }
-
-//Stage Completions
-$database_call = $db_prefix."stages";
-if ($result = $conn->query("SELECT COUNT(*) as stagetimes FROM $database_call")) { $row = $result->fetch_object(); $stagetimes = $row->stagetimes;  $result->close(); }
-
-//Total Points
-$database_call = $db_prefix."playerrank";
-if ($result = $conn->query("SELECT SUM(points) as totalpoints FROM $database_call")) { $row = $result->fetch_object(); $totalpoints = $row->totalpoints;  $result->close(); }
-
-//Players last month
-$database_call = $db_prefix."playerrank";
-if ($result = $conn->query("SELECT COUNT(*) as recentplayers FROM $database_call WHERE `lastseen` BETWEEN CURDATE() - INTERVAL 31 DAY AND CURDATE()")) { $row = $result->fetch_object(); $recentplayers = $row->recentplayers;  $result->close(); }
-*/
 
 //Player Count
 $database_call = $db_prefix."stats";
@@ -69,34 +44,7 @@ if ($result = $conn->query("SELECT value as recentplayers FROM $database_call WH
 </table>
 
 <?php
-/*
-
-<h2>Our Servers</h2>
-
-<table class="table table-striped table-hover ">
-	<thead>
-		<tr>
-			<th>IP</th>
-			<th>Server Name</th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-		$file = fopen("servers.txt","r");
-		while(! feof($file))
-		{
-			$pieces = htmlspecialchars(fgets($file),ENT_QUOTES);
-			$pieces = explode("|", $pieces);
-			echo "<tr><td><a href='steam://connect/".$pieces[0]."'>".$pieces[0]."</a></td><td>".$pieces[1]."</td></tr>";
-		}
-
-		fclose($file);
-	?>
-	</tbody>
-</table>
-*/
 $database_call = $db_prefix."playerrank";
-
 $sql = "SELECT * FROM $database_call ORDER BY points DESC LIMIT 10";
 $result = $conn->query($sql);
 ?>
@@ -120,9 +68,8 @@ $result = $conn->query($sql);
 		while($row = $result->fetch_assoc()) {
 
 			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["country"]."</td><td>".$row["points"]."</td><td>".$row['finishedmaps']."<td>".$row['lastseen']."</td></tr>";
-
 		}
-	} 
+	}
 	?>
 	</tbody>
 </table>
@@ -159,13 +106,16 @@ $result = $conn->query($sql);
 			$timestamp = $dt->format('M j, Y, g:i a T');
 			
 			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td><a href='?view=map&name=".$row["map"]."'>".$row["map"]."</a></td><td>".$timestamp."</td></tr>";
-
 		}
-	} 
-
+	}
 	?>
 	</tbody>
 </table>
+<footer>
+	<center>
+		Made with free, <a href="https://gitlab.com/Rowedahelicon/CkSurfStatsPage", target="_">open source</a> software.
+	</center>
+</footer>
 <?php
 $conn->close();
 }
