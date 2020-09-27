@@ -54,7 +54,7 @@ while ($row = $result->fetch_assoc())
 //Get Map Times
 $database_call = $db_prefix."playertimes";
 
-$sql = "SELECT mapname, date, (SELECT count(1)+1 FROM $database_call b WHERE a.mapname=b.mapname AND a.runtimepro > b.runtimepro) AS rank, runtimepro FROM $database_call a WHERE steamid = '$steamid'";
+$sql = "SELECT mapname, date, (SELECT count(1)+1 FROM $database_call b WHERE a.mapname=b.mapname AND a.runtimepro > b.runtimepro) AS rank, runtimepro, startspeed FROM $database_call a WHERE steamid = '$steamid'";
 $result = $conn->query($sql);
 $map_array = array();
 $recordStat = 0;
@@ -63,14 +63,14 @@ if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		array_push($map_array,$row["mapname"]);
-		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$row["rank"]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td></tr>";
+		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$row["rank"]."</td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
 	}
 }
 
 //Get Bonus Times
 $database_call = $db_prefix."bonus";
 
-$sql = "SELECT mapname, date, (SELECT count(1)+1 FROM $database_call b WHERE a.mapname=b.mapname AND a.runtime > b.runtime AND a.zonegroup = b.zonegroup) AS rank, runtime, zonegroup FROM $database_call a WHERE steamid = '$steamid'";
+$sql = "SELECT mapname, date, (SELECT count(1)+1 FROM $database_call b WHERE a.mapname=b.mapname AND a.runtime > b.runtime AND a.zonegroup = b.zonegroup) AS rank, runtime, zonegroup, startspeed FROM $database_call a WHERE steamid = '$steamid'";
 $result = $conn->query($sql);
 $bonus_array = array();
 $recordStat = 0;
@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		array_push($bonus_array,$row["mapname"]);
-		$bonus_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td>".$row["rank"]."</td><td>".$row["zonegroup"]."</td><td>".$row["date"]."</td></tr>";
+		$bonus_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td>".$row["rank"]."</td><td>".$row["zonegroup"]."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
 	}
 }
 
@@ -94,7 +94,7 @@ foreach ($map_array as $value){
 	if ($result->num_rows > 0) {
 		$x = 1;
 		while($row = $result->fetch_assoc()) {
-		if($row["steamid"] == $steamid){ $recordStat++; $record_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><span class='rank_$x'><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</span></td></tr>"; } $x++;
+		if($row["steamid"] == $steamid){ $recordStat++; $record_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><span class='rank_$x'><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</span></td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>"; } $x++;
 		}
 	}
 }
@@ -132,6 +132,8 @@ if ($result->num_rows > 0) {
 			<th>Map Name</th>
 			<th>Rank</th>
 			<th>Best Time</th>
+			<th>Date</th>
+			<th>Start Speed</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -148,6 +150,7 @@ if ($result->num_rows > 0) {
 			<th>Rank</th>
 			<th>Personal Best</th>
 			<th>Date</th>
+			<th>Start Speed</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -165,6 +168,7 @@ if ($result->num_rows > 0) {
 			<th>Rank</th>
 			<th>Bonus</th>
 			<th>Date</th>
+			<th>Start Speed</th>
 		</tr>
 	</thead>
 	<tbody>
