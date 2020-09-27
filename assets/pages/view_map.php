@@ -95,6 +95,7 @@ $result = $conn->query($sql);
 			<th></th>
 			<th>Best Time</th>
 			<th>Date</th>
+			<th>Start Speed</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -105,9 +106,9 @@ $result = $conn->query($sql);
 			$x=1;
 			while($row = $result->fetch_assoc()) {
 				if($x<=3) {
-					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td></tr>";
+					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]."</td></tr>";
 				}else{
-					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td></tr>";
+					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]."</td></tr>";
 				}
 			$x++;
 			}

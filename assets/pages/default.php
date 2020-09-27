@@ -45,7 +45,7 @@ if ($result = $conn->query("SELECT value as recentplayers FROM $database_call WH
 
 <?php
 $database_call = $db_prefix."playerrank";
-$sql = "SELECT * FROM $database_call ORDER BY points DESC LIMIT 10";
+$sql = "SELECT steamid, name, country, points, finishedmaps, lastseen FROM $database_call ORDER BY points DESC LIMIT 10";
 $result = $conn->query($sql);
 ?>
 
@@ -113,7 +113,7 @@ $result = $conn->query($sql);
 </table>
 <footer>
 	<center>
-		Made with free, <a href="https://gitlab.com/Rowedahelicon/CkSurfStatsPage", target="_">open source</a> software.
+		Made with free, <a href="https://github.com/Sneaks-Community/SurfStats-Web", target="_">open source</a> software.
 	</center>
 </footer>
 <?php
