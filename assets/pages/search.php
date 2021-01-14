@@ -18,7 +18,7 @@ if($secure==1){
 	foreach ($searchTerms as $term) {
 		$term = trim($term);
 		if (strlen($term) < 3){
-				echo"<div class=\"alert alert-dismissible alert-warning\"><h4>Error</h4><p>Please use more 3 characters or more to search!</p></div>";
+				echo"<div class=\"alert alert-dismissible alert-warning\"><h4>Error</h4><p>Please use 3 characters or more to search!</p></div>";
 			}
 		else if (!empty($term)) {
 			$searchTermUnits[] = "name LIKE '%$term%' ORDER BY points DESC";
