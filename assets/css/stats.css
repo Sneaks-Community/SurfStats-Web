@@ -31,3 +31,34 @@ footer img{
 .rank_1{color:#FAE800;}
 .rank_2{color:#F1F1F1;}
 .rank_3{color:#CDA04D;}
+
+@media(max-width:768px){
+	.container-fluid {
+		padding-right: 15px!important;
+	}
+	#navTest {
+		max-width: 85%;
+	}
+	.navbar-nav{
+		padding-left: 15px;
+		text-align: left;
+	}
+	.navbar-form {
+		padding-left: 20px;
+		text-align: left;
+	}
+	.form-group {
+		display:flex;
+		width:50%;
+	}
+	#surfSearchBar {
+	
+		padding-left: 15px;
+	}
+
+	#searchSubmit {
+		margin-left:10px;
+	}
+}
+
+
