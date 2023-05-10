@@ -100,20 +100,22 @@ $result = $conn->query($sql);
 	</thead>
 	<tbody>
 		<?php
-
 		if ($result->num_rows > 0) {
 			// output data of each row
 			$x=1;
 			while($row = $result->fetch_assoc()) {
 				if($x<=3) {
-					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
+					if( isset($_GET['p']) && $_GET['p'] == 1 ) {
+						echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
+					} else {
+						echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
+					}
 				}else{
 					echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
 				}
 			$x++;
 			}
 		} 
-
 		?>
 	</tbody>
 </table>
