@@ -67,40 +67,58 @@ jQuery(document).ready(function($) {
 <div class="container">
 
 <h1><?php echo $stat_name; ?></h1>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-		<li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-        <li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
-		<li><a href="?view=players"><i class="fa fa-users" aria-hidden="true"></i> Players</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" action="?view=search" method="post">
-        <div class="form-group">
-			<input name="search" class="form-control" placeholder="Search Players" type="text">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
-      </ul>
-    </div>
-  </div>
+<nav class="navbar navbar-inverse" id="navTest">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+			<li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
+			<li><a href="?view=players"><i class="fa fa-users" aria-hidden="true"></i> Players</a></li>
+		</ul>
+		<form class="navbar-form navbar-left" action="?view=search" method="post" id="surfSearchBar">
+			<div class="form-group">
+				<input id="searchInput" name="search" class="form-control" placeholder="Search Players" type="text">
+				<button type="submit" class="btn btn-default" id="searchSubmit">Submit</button>
+			</div>
+		</form>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
+		</ul>
+	</div>
   <center>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Surf Stats 2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-2422230716896877"
-     data-ad-slot="9083626575"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</center>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Surf Stats 2 -->
+		<ins class="adsbygoogle"
+			style="display:inline-block;width:728px;height:90px"
+			data-ad-client="ca-pub-2422230716896877"
+			data-ad-slot="9083626575"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</center>
 </nav>
+<script>
+	// grab screen size, and make adjustments
+	var viewPortSize = document.documentElement.clientWidth;
+	if(viewPortSize <768) {
+		var element = document.getElementById('surfSearchBar');
+		element.classList.remove('navbar-form');
+	} else if (viewPortSize >=768) {
+		var element = document.getElementById('surfSearchBar');
+		element.classList.add('navbar-form');
+	}
+	// grab new screen size on resize. 
+	window.onresize = onScreenResize;
+	function onScreenResize() {
+		var viewPortSize = document.documentElement.clientWidth;
+		if(viewPortSize <768) {
+			var element = document.getElementById('surfSearchBar');
+			element.classList.remove('navbar-form');
+		} else if (viewPortSize >=768) {
+			var element = document.getElementById('surfSearchBar');
+			element.classList.add('navbar-form');
+		}
+	}
+</script>
 
 <?php
 
