@@ -41,6 +41,7 @@ $group_url = $_ENV['GROUP_URL'] ?? '/';
 $local_timezone = $_ENV['LOCAL_TIMEZONE'] ?? 'America/Chicago';
 $conf_language = $_ENV['CONF_LANGUAGE'] ?? 'eng';
 $conf_record_stats = $_ENV['CONF_RECORD_STATS'] ?? '1';
+$map_images_url = $_ENV['MAP_IMAGES_URL'] ?? '../bans/images/maps/';
 
 // Set timezone
 date_default_timezone_set($local_timezone);

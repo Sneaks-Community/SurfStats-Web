@@ -112,7 +112,7 @@ $result = $stmt->get_result();
 </style>
 
 <div class="subheader">
-    <img src="<?php echo "../bans/images/maps/" . esc($mapname) . ".jpg"; ?>" alt="<?php echo esc($mapname); ?>">
+    <img src="<?php echo esc($map_images_url) . esc($mapname) . ".jpg"; ?>" alt="<?php echo esc($mapname); ?>">
     <h2><?php echo esc($mapname); ?> <a href="<?php echo "https://fastdl.snksrv.com/maps/" . esc($mapname) . ".bsp.bz2"; ?>" target=\"_blank\" rel=\"noopener noreferrer\"><i class='fa fa-download' aria-hidden='true'></i></a></h2>
     <h5>Map Author: <?php echo esc($map_author); ?></h5>
     <b>Completions: <?php echo esc($run_cnt); ?></b><br/>
