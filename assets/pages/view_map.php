@@ -217,7 +217,7 @@ $result = $stmt->get_result();
     <tbody>
         <?php
         if ($result->num_rows > 0) {
-            $x = 1;
+            $x = ($page_start / 50) * 50 + 1;
             while($row = $result->fetch_assoc()) {
                 $rankBadge = "";
                 if ($x <= 3) {
