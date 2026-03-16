@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		array_push($map_array,$row["mapname"]);
-		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td></tr>";
+		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".processFloat($row["runtimepro"])."</td></tr>";
 	}
 }
 

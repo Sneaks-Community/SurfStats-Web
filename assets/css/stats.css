@@ -21,7 +21,8 @@ footer img{
 }
 
 .container{
-	width:950px;
+	max-width:950px;
+	width:100%;
 	background-color:#28313A;
 	background-color: rgba(40, 49, 58, 0.9);
 	border: 5px solid #3D4959;
@@ -31,3 +32,57 @@ footer img{
 .rank_1{color:#FAE800;}
 .rank_2{color:#F1F1F1;}
 .rank_3{color:#CDA04D;}
+
+/* Dark Theme Bootstrap Overrides */
+/* Navbar */
+.navbar-default {
+	background-color: #1B2128 !important;
+	border-color: #000 !important;
+}
+
+/* Mobile Navbar - Keep buttons horizontal */
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav {
+		margin: 0;
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+	}
+	.navbar-default .navbar-nav > li {
+		float: none;
+		flex-shrink: 0;
+	}
+	.navbar-default .navbar-nav > li > a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
+/* Tables */
+.table {
+	background-color: #1D242A !important;
+	color: #64242B !important;
+}
+
+/* Remove default table borders for dark theme */
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	border-top: none !important;
+}
+
+.table > thead > tr > th {
+	border-bottom: 2px solid #000 !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: #212A31 !important;
+	color: #999B9D !important;
+}
+
+.table-hover > tbody > tr:hover {
+	background-color: #1D242A !important;
+}
