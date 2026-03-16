@@ -1,4 +1,48 @@
-<?php $secure = 1; include("config.php"); include("assets/lang/$conf_language.php"); $page_topic = htmlspecialchars($_GET['view'], ENT_QUOTES); ?>
+<?php
+/**
+ * Surf Stats - Main Entry Point
+ * 
+ * This is the main entry point for the Surf Stats application.
+ * Security headers are set, CSRF protection is enabled, and
+ * all page includes use an allowlist to prevent LFI attacks.
+ */
+
+// Start session for CSRF protection
+session_start();
+
+// Include configuration and security helpers
+$secure = 1;
+include("config.php");
+
+// Set security headers
+setSecurityHeaders();
+
+// Include language file
+include("assets/lang/$conf_language.php");
+
+// Define allowed pages (allowlist) - prevents LFI attacks
+$allowed_pages = [
+    'map' => 'assets/pages/view_map.php',
+    'maps' => 'assets/pages/view_maps.php',
+    'players' => 'assets/pages/playerlist.php',
+    'profile' => 'assets/pages/view_profile.php',
+    'recent' => 'assets/pages/view_recent.php',
+    'search' => 'assets/pages/search.php',
+    'home' => 'assets/pages/default.php'
+];
+
+// Get view parameter with validation
+$page_topic = isset($_GET['view']) ? $_GET['view'] : 'home';
+
+// Sanitize page topic - only allow alphanumeric characters
+$page_topic = preg_replace('/[^a-zA-Z0-9_-]/', '', $page_topic);
+
+// Check allowlist - default to home if not in allowlist or file doesn't exist
+if (!isset($allowed_pages[$page_topic]) || !file_exists($allowed_pages[$page_topic])) {
+    $page_topic = 'home';
+}
+
+?>
 <?php
 function processFloat($decimal)
 {
@@ -26,10 +70,10 @@ function processFloat($decimal)
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $stat_name; ?></title>
+	<title><?php echo esc($stat_name); ?></title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
-	<script src="//code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/stats.css" />
 	<meta name="description" content="Surf Stats Page">
@@ -43,30 +87,29 @@ function processFloat($decimal)
 	<script src="assets/js/sorttable.min.js"></script>
 </head>
 <body>
-<script src=https://snksrv.com/js/jquery.backstretch.min.js></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
 <script>
 jQuery(document).ready(function($) {
- 		// Image Array Variable
-		var images = [
-		'assets/images/aether2.jpg',
-		'assets/images/surf_edge.jpg',
-		'assets/images/surf_extremex.jpg',
-		'assets/images/surf_lt_unicorn_official.jpg',
-		'assets/images/surf_summer.jpg',
-		];
- 		// Function to Shuffle through the Array Randomly
-				var slideshow = images.sort(function() { return 0.5 - Math.random() });
+   	// Image Array Variable
+    var images = [
+        'assets/images/aether2.jpg',
+        'assets/images/surf_edge.jpg',
+        'assets/images/surf_extremex.jpg',
+        'assets/images/surf_lt_unicorn_official.jpg',
+        'assets/images/surf_summer.jpg',
+    ];
+    // Function to Shuffle through the Array Randomly
+    var slideshow = images.sort(function() { return 0.5 - Math.random(); });
  		// Displays a Random Image to begin the slideshow and randomizes the slideshow.
-	$("body").backstretch(slideshow,
-		{
-			duration:7000,
-			fade:1100,
-		});
+    $("body").backstretch(slideshow, {
+        duration: 7000,
+        fade: 1100
+    });
 });
 </script>
 <div class="container">
 
-<h1><?php echo $stat_name; ?></h1>
+<h1><?php echo esc($stat_name); ?></h1>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -79,13 +122,14 @@ jQuery(document).ready(function($) {
 		<li><a href="?view=players"><i class="fa fa-users" aria-hidden="true"></i> Players</a></li>
       </ul>
       <form class="navbar-form navbar-left" action="?view=search" method="post">
+        <input type="hidden" name="csrf_token" value="<?php echo csrfToken(); ?>">
         <div class="form-group">
 			<input name="search" class="form-control" placeholder="Search Players" type="text">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo $group_url; ?>"><?php echo $group_name; ?></a></li>
+        <li><a href="<?php echo esc($group_url); ?>"><?php echo esc($group_name); ?></a></li>
       </ul>
     </div>
   </div>
@@ -103,44 +147,8 @@ jQuery(document).ready(function($) {
 </nav>
 
 <?php
-
-switch($page_topic){
-	
-	case "map":
-		include("assets/pages/view_map.php");
-	break;
-	case "maps":
-		include("assets/pages/view_maps.php");
-	break;
-	case "players":
-		include("assets/pages/playerlist.php");
-	break;
-	case "profile":
-		switch($conf_record_stats){
-			case"0":
-				include("assets/pages/view_profile_0.php");
-			break;
-			case"1":
-				include("assets/pages/view_profile.php");
-			break;
-			case"2":
-				include("assets/pages/view_profile_2.php");
-			break;
-			default:
-				include("assets/pages/view_profile.php");
-		}
-	break;
-	case "recent":
-		include("assets/pages/view_recent.php");
-	break;
-	case "search":
-		include("assets/pages/search.php");
-	break;
-	default:
-	
-	include("assets/pages/default.php");
-}
-
+// Include the requested page from allowlist
+include($allowed_pages[$page_topic]);
 ?>
 
 <footer>
