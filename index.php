@@ -73,7 +73,7 @@ function processFloat($decimal)
 	<title><?php echo esc($stat_name); ?></title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
-	<script src="assets/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/stats.css" />
 	<meta name="description" content="Surf Stats Page">
