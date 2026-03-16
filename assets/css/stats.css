@@ -21,7 +21,8 @@ footer img{
 }
 
 .container{
-	width:950px;
+	max-width:950px;
+	width:100%;
 	background-color:#28313A;
 	background-color: rgba(40, 49, 58, 0.9);
 	border: 5px solid #3D4959;
@@ -37,6 +38,24 @@ footer img{
 .navbar-default {
 	background-color: #1B2128 !important;
 	border-color: #000 !important;
+}
+
+/* Mobile Navbar - Keep buttons horizontal */
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav {
+		margin: 0;
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+	}
+	.navbar-default .navbar-nav > li {
+		float: none;
+		flex-shrink: 0;
+	}
+	.navbar-default .navbar-nav > li > a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 }
 
 /* Tables */

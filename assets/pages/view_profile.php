@@ -84,7 +84,7 @@ while($row = $result_save->fetch_assoc()) {
     $recordBadge = isset($record_times[$row['mapname']]) ? $record_times[$row['mapname']] : '';
     $map_times .= "<tr><td><a href='?view=map&name=" . esc($row["mapname"]) . "'>" . esc($row["mapname"]) . "</a></td>";
     $map_times .= "<td>" . $recordBadge . "</td>";
-    $map_times .= "<td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td></tr>";
+    $map_times .= "<td>" . processFloat($row["runtimepro"]) . "</td></tr>";
 }
 $stmt->close();
 

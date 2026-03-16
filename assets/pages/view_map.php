@@ -133,7 +133,7 @@ $result = $stmt->get_result();
         if ($current_page > $row_cnt) $current_page = $row_cnt;
         
         // Calculate visible page range
-        $max_visible = 8; // Maximum number of page links to show
+        $max_visible = 6; // Maximum number of page links to show
         $show_pages = array();
         
         if ($row_cnt <= $max_visible + 1) {
@@ -226,7 +226,7 @@ $result = $stmt->get_result();
                 echo "<tr>";
                 echo "<td><a href='?view=profile&id=" . esc($row["steamid"]) . "'>" . esc($row["name"]) . "</a></td>";
                 echo "<td>" . $rankBadge . "</td>";
-                echo "<td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td>";
+                echo "<td>" . processFloat($row["runtimepro"]) . "</td>";
                 echo "<td>" . esc($row["date"]) . "</td>";
                 echo "<td>" . esc($row["startspeed"]) . " u/s</td>";
                 echo "</tr>";

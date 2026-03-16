@@ -63,7 +63,7 @@ if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		array_push($map_array,$row["mapname"]);
-		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$row["rank"]."</td><td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
+		$map_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".$row["rank"]."</td><td>".processFloat($row["runtimepro"])."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
 	}
 }
 
@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
 	// output data of each row
 	while($row = $result->fetch_assoc()) {
 		array_push($bonus_array,$row["mapname"]);
-		$bonus_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td>".$row["rank"]."</td><td>".$row["zonegroup"]."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
+		$bonus_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td>".processFloat($row["runtime"])."</td><td>".$row["rank"]."</td><td>".$row["zonegroup"]."</td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>";
 	}
 }
 
@@ -94,7 +94,7 @@ foreach ($map_array as $value){
 	if ($result->num_rows > 0) {
 		$x = 1;
 		while($row = $result->fetch_assoc()) {
-		if($row["steamid"] == $steamid){ $recordStat++; $record_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><span class='rank_$x'><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> ".processFloat($row["runtimepro"])."</span></td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>"; } $x++;
+		if($row["steamid"] == $steamid){ $recordStat++; $record_times .= "<tr><td><a href='?view=map&name=".$row["mapname"]."'>".$row["mapname"]."</a></td><td><span class='rank_$x' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='".$lang_rank[$x]."'><i class='fa fa-trophy' aria-hidden='true'></i></span></td><td><span class='rank_$x'>".processFloat($row["runtimepro"])."</span></td><td>".$row["date"]."</td><td>".$row["startspeed"]." u/s</td></tr>"; } $x++;
 		}
 	}
 }

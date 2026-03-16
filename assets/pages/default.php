@@ -45,7 +45,7 @@ if ($result = $conn->query("SELECT value as recentplayers FROM $database_call WH
 
 <?php
 $database_call = $db_prefix."playerrank";
-$sql = "SELECT steamid, name, country, points, finishedmaps, lastseen FROM $database_call ORDER BY points DESC LIMIT 10";
+$sql = "SELECT steamid, name, points, finishedmaps, lastseen FROM $database_call ORDER BY points DESC LIMIT 10";
 $result = $conn->query($sql);
 ?>
 
@@ -55,7 +55,6 @@ $result = $conn->query($sql);
 	<thead>
 		<tr>
 			<th>Player Name</th>
-			<th>Country</th>
 			<th>Points</th>
 			<th>Maps Completed</th>
 			<th>Last Played</th>
@@ -67,7 +66,7 @@ $result = $conn->query($sql);
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
 
-			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["country"]."</td><td>".$row["points"]."</td><td>".$row['finishedmaps']."<td>".$row['lastseen']."</td></tr>";
+			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td>".$row["points"]."</td><td>".$row['finishedmaps']."<td>".$row['lastseen']."</td></tr>";
 		}
 	}
 	?>

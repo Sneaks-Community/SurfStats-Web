@@ -51,7 +51,7 @@ $result = $stmt->get_result();
             if ($current_page > $row_cnt) $current_page = $row_cnt;
             
             // Calculate visible page range
-            $max_visible = 8; // Maximum number of page links to show
+            $max_visible = 5; // Maximum number of page links to show
             $show_pages = array();
             
             if ($row_cnt <= $max_visible + 1) {

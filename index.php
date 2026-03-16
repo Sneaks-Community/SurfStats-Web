@@ -70,6 +70,7 @@ function processFloat($decimal)
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo esc($stat_name); ?></title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -113,38 +114,37 @@ jQuery(document).ready(function($) {
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-		<li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-        <li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
-		<li><a href="?view=players"><i class="fa fa-users" aria-hidden="true"></i> Players</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" action="?view=search" method="post">
-        <input type="hidden" name="csrf_token" value="<?php echo csrfToken(); ?>">
-        <div class="form-group">
-			<input name="search" class="form-control" placeholder="Search Players" type="text">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo esc($group_url); ?>"><?php echo esc($group_name); ?></a></li>
-      </ul>
-    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="?view=home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+      <li><a href="?view=maps"><i class="fa fa-map-marker" aria-hidden="true"></i> Maps</a></li>
+      <li><a href="?view=players"><i class="fa fa-users" aria-hidden="true"></i> Players</a></li>
+      <li class="search-toggle-mobile visible-xs">
+        <a href="#" id="search-toggle-btn-mobile"><i class="fa fa-search" aria-hidden="true"></i></a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right hidden-xs">
+      <li class="search-toggle">
+        <a href="#" id="search-toggle-btn"><i class="fa fa-search" aria-hidden="true"></i></a>
+      </li>
+      <li><a href="<?php echo esc($group_url); ?>"><?php echo esc($group_name); ?></a></li>
+    </ul>
+    <form class="navbar-form navbar-right search-form" action="?view=search" method="post" id="search-form" style="display: none;">
+      <input type="hidden" name="csrf_token" value="<?php echo csrfToken(); ?>">
+      <div class="form-group">
+        <input name="search" class="form-control" placeholder="Search Players" type="text">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
   </div>
-  <center>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Surf Stats 2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-2422230716896877"
-     data-ad-slot="9083626575"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</center>
 </nav>
+<script>
+$(document).ready(function(){
+  $('#search-toggle-btn, #search-toggle-btn-mobile').click(function(e) {
+    e.preventDefault();
+    $('#search-form').toggle();
+  });
+});
+</script>
 
 <?php
 // Include the requested page from allowlist
@@ -152,15 +152,6 @@ include($allowed_pages[$page_topic]);
 ?>
 
 <footer>
-<p><center><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Surf Stats Ad -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-2422230716896877"
-     data-ad-slot="1979162176"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script></center></p>
 </footer>
 
 </div>
