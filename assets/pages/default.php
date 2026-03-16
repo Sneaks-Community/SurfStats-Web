@@ -105,7 +105,7 @@ $result = $conn->query($sql);
 			$dt->setTimestamp($timestamp);
 			$timestamp = $dt->format('M j, Y, g:i a T');
 			
-			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td><a href='?view=map&name=".$row["map"]."'>".$row["map"]."</a></td><td>".$timestamp."</td></tr>";
+			echo "<tr><td><a href='?view=profile&id=".$row["steamid"]."'>".$row["name"]."</a></td><td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> ".processFloat($row["runtime"])."</td><td><a href='?view=map&name=".$row["map"]."'>".$row["map"]."</a></td><td>".$timestamp."</td></tr>";
 		}
 	}
 	?>

@@ -38,7 +38,7 @@ $result = $stmt->get_result();
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td><a href='?view=profile&id=" . esc($row["steamid"]) . "'>" . esc($row["name"]) . "</a></td>";
-                echo "<td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> " . processFloat($row["runtime"]) . "</td>";
+                echo "<td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> " . processFloat($row["runtime"]) . "</td>";
                 echo "<td><a href='?view=map&name=" . esc($row["mapname"]) . "'>" . esc($row["mapname"]) . "</a></td>";
                 echo "<td>" . esc($row['date']) . "</td>";
                 echo "</tr>";

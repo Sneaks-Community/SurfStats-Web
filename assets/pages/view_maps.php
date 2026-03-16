@@ -57,7 +57,7 @@ if (!$result) {
                 echo "<tr>";
                 echo "<td><a href='?view=map&name=" . esc($row["mapname"]) . "'>" . esc($row["mapname"]) . "</a></td>";
                 echo "<td>" . esc($this_map_tier) . "</td>";
-                echo "<td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td>";
+                echo "<td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td>";
                 echo "<td><a href='?view=profile&id=" . esc($row["steamid"]) . "'>" . esc($row["name"]) . "</a></td>";
                 echo "</tr>";
             }

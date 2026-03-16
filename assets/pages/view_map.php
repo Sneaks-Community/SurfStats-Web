@@ -226,7 +226,7 @@ $result = $stmt->get_result();
                 echo "<tr>";
                 echo "<td><a href='?view=profile&id=" . esc($row["steamid"]) . "'>" . esc($row["name"]) . "</a></td>";
                 echo "<td>" . $rankBadge . "</td>";
-                echo "<td><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td>";
+                echo "<td><i class=\"fa fa-clock\" aria-hidden=\"true\"></i> " . processFloat($row["runtimepro"]) . "</td>";
                 echo "<td>" . esc($row["date"]) . "</td>";
                 echo "<td>" . esc($row["startspeed"]) . " u/s</td>";
                 echo "</tr>";

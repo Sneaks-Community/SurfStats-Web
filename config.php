@@ -173,10 +173,10 @@ function setSecurityHeaders() {
     
     // Content Security Policy
     header("Content-Security-Policy: default-src 'self'; " .
-           "script-src 'self' 'unsafe-inline' https://code.jquery.com; " .
-           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " .
+           "script-src 'self' 'unsafe-inline' https://code.jquery.com https://pagead2.googlesyndication.com https://static.cloudflareinsights.com; " .
+           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " .
            "img-src 'self' data: https:; " .
-           "font-src 'self' https://fonts.gstatic.com; " .
+           "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " .
            "frame-ancestors 'self';");
     
     // Referrer Policy
